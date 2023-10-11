@@ -16,6 +16,21 @@ public static class Program
         Console.WriteLine("--------Hello From Server!");
         Console.WriteLine($"--------Time server running... Listening on port: {port}");
 
+        //As long as we want the server to run
+        while (true)
+        {
+            //Accept new client that tries to connect
+            TcpClient tcpClient = tcpListener.AcceptTcpClient();
+            byte[] buffer = new byte[100];
+            NetworkStream stream = tcpClient.GetStream();
+            stream.Read(buffer, 0, 100);
+            Console.WriteLine("Client said: " + Encoding.ASCII.GetString(buffer));
 
+
+
+
+            
+
+        }
     }
 }
