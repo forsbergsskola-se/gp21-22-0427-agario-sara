@@ -33,10 +33,13 @@ public static class Program
             string message = "-----Actual Date time:" + "\r\n";
             message+= currentTime.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
             message += "Thank you for connecting!";
+
             //Send the current DateTime Encoded into Bytes
             byte[] responseBuffer = Encoding.ASCII.GetBytes(message);
             stream.Write(responseBuffer, 0, responseBuffer.Length);
-            
+
+            //Close the Client:
+            tcpClient.Close();
         }
     }
 }
