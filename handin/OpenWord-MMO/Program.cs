@@ -11,6 +11,9 @@ class Program
 
     private static UdpClient? udpClient;
 
+    private static string accumulatedText = "";  // To accumulate and remember the text
+
+
     public static void Main(string[] args)
     {
         Console.WriteLine("--------Hello From Server!");
@@ -29,12 +32,16 @@ class Program
 
             Console.WriteLine($"Received {receivedBytes.Length} bytes...");
 
+            
+
             if (ValidateReceivedMessage(receivedBytes))
             {
                 Console.WriteLine("--||Accepted!");
 
-                string responseMessage = Encoding.ASCII.GetString(receivedBytes);
-                SendData(responseMessage, remoteEndPoint);
+                string receivedWord = Encoding.ASCII.GetString(receivedBytes);
+                accumulatedText += " " + receivedWord;
+                Console.WriteLine($"Received word: {accumulatedText} ...");
+                SendData(accumulatedText, remoteEndPoint);
             }
         }
     }
@@ -47,8 +54,9 @@ class Program
         return (receivedBytes, remoteEndPoint);
     }
     
-    //Send data (a response message) to a client at the provided remote endpoint
 
+
+    //Send data (a response message) to a client at the provided remote endpoint
     private static void SendData(string message, IPEndPoint remoteEndPoint)
     {
         byte[] messageBytes = Encoding.ASCII.GetBytes(message);
