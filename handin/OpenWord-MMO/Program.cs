@@ -39,9 +39,9 @@ class Program
                 Console.WriteLine("--||Accepted!");
 
                 string receivedWord = Encoding.ASCII.GetString(receivedBytes);
-                accumulatedText += " " + receivedWord;
-                Console.WriteLine($"Received word: {accumulatedText} ...");
-                SendData(accumulatedText, remoteEndPoint);
+                //accumulatedText += " " + receivedWord;
+                Console.WriteLine($"Received word: {receivedWord} ...");
+                SendData(receivedWord, remoteEndPoint);
             }
         }
     }
