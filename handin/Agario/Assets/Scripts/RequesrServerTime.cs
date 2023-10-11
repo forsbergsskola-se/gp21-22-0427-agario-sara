@@ -4,36 +4,36 @@ using System.Net.Sockets;
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RequestServerTime : MonoBehaviour
 {
-    public TextMeshProUGUI dateTimeOutputText;
-    public string serverIp = "127.0.0.1";
+    public TextMeshProUGUI timeOutputTextMeshPro;
+
+    //Connection settings
+    public string serverIp = "127.0.0.1"; 
     public int serverPort = 44444;
+    public int clientPort = 44446;
 
     public void SendRequest()
     {
-        try
-        {
-            //Opening the stream
-            TcpClient client = new TcpClient(serverIp, serverPort);
-            NetworkStream stream = client.GetStream();
-            //Reading a first information (welcome) from server 
-            byte[] buffer = new byte[1024];
-            int bytesRead = stream.Read(buffer, 0, buffer.Length);
-            string welcomeMessage = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            dateTimeOutputText.text = welcomeMessage;
-            //Read dateTime from server
-            bytesRead = stream.Read(buffer, 0, buffer.Length);
-            //Convert to String and assign to TMPro text to display in UI (dateTimeOutputText)
-            string dateTime = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            dateTimeOutputText.text = dateTime;
-            
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("An error occurred: " + ex.Message);
-        }
+        // Create a new TCP client and connect to the server
+        IPEndPoint serverEndpoint = new IPEndPoint(IPAddress.Loopback, serverPort);
+        IPEndPoint clientEndpoint = new IPEndPoint(IPAddress.Loopback, clientPort);
+
+        // Start a client end point
+        TcpClient tcpClient = new TcpClient(clientEndpoint);
+
+        // Connect to the server's end point
+        tcpClient.Connect(serverEndpoint);
+
+        // Receive a message from the server
+        NetworkStream stream = tcpClient.GetStream();
+        byte[] buffer = new byte[100];
+        stream.Read(buffer, 0, 100);
+        string message = Encoding.ASCII.GetString(buffer);
+        timeOutputTextMeshPro.text = "The Server said: " + message;
+
+        // Close the client
+        tcpClient.Close();
     }
 }
