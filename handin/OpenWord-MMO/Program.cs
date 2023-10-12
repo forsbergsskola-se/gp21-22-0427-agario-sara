@@ -25,23 +25,25 @@ class Program
         //Loop and send a message "accepted" when connection is established
         while (true)
         {
-            Console.WriteLine("---||Waiting for connections...");
+            Console.WriteLine("---||Server Ready and Waiting to receive...");
 
             //Receive data from a client and get the remote endpoint
             var (receivedBytes, remoteEndPoint) = ReceiveData();
 
-            Console.WriteLine($"Received {receivedBytes.Length} bytes...");
+            Console.WriteLine($"Number of characters of received message: {receivedBytes.Length} ...");
 
-            
 
             if (ValidateReceivedMessage(receivedBytes))
             {
                 Console.WriteLine("--||Accepted!");
 
                 string receivedWord = Encoding.ASCII.GetString(receivedBytes);
-                //accumulatedText += " " + receivedWord;
-                Console.WriteLine($"Received word: {receivedWord} ...");
-                SendData(receivedWord, remoteEndPoint);
+                Console.WriteLine($"||Received word: {receivedWord} ...");
+                accumulatedText += " " + receivedWord;
+           
+                Console.WriteLine("||Received message joined with existing messages");
+                SendData(accumulatedText, remoteEndPoint);
+
             }
         }
     }

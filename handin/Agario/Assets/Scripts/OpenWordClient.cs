@@ -9,7 +9,8 @@ using TMPro;
 
 public class OpenWordClient : MonoBehaviour
 {
-    public TMP_InputField wordInputField;
+    //public TMP_InputField wordInputField;
+    public InputField wordInputField;
     public TextMeshProUGUI responseText;
 
     private UdpClient udpClient;
@@ -30,6 +31,7 @@ public class OpenWordClient : MonoBehaviour
     public void SendWord()
     {
         string word = wordInputField.text;
+        Debug.Log("Word collected:"+word);
 
         // Validate the input word.
         if (string.IsNullOrEmpty(word) || word.Length > 20 || word.Contains(" "))
