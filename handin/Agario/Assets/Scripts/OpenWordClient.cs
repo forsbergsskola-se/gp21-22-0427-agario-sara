@@ -9,23 +9,18 @@ using TMPro;
 
 public class OpenWordClient : MonoBehaviour
 {
-    //public TMP_InputField wordInputField;
-    public InputField wordInputField;
+    public TMP_InputField wordInputField;
     public TextMeshProUGUI responseText;
 
     private UdpClient udpClient;
     private IPEndPoint serverEndPoint;
 
-    private const int serverPort = 44444;  // Use the appropriate port for your Open Word MMO server.
+    private const int serverPort = 44444;
 
     void Start()
     {
         udpClient = new UdpClient();
-        serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), serverPort); // Set the server's IP address.
-
-        // Hook up the Send Button's onClick event to your SendWord method.
-        Button sendButton = GetComponent<Button>();
-        sendButton.onClick.AddListener(SendWord);
+        serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), serverPort);
     }
 
     public void SendWord()
@@ -33,26 +28,26 @@ public class OpenWordClient : MonoBehaviour
         string word = wordInputField.text;
         Debug.Log("Word collected:"+word);
 
-        // Validate the input word.
+        // Validate the input word.(is local)
         if (string.IsNullOrEmpty(word) || word.Length > 20 || word.Contains(" "))
         {
             responseText.text = "Invalid word. Please enter a single word (less than 20 characters).";
             return;
         }
-
-        byte[] wordBytes = Encoding.ASCII.GetBytes(word);
+        //Prepare collectedWord
+        byte[] wordCollectedBytes = Encoding.ASCII.GetBytes(word);
 
         try
         {
-            udpClient.Send(wordBytes, wordBytes.Length, serverEndPoint);
+            udpClient.Send(wordCollectedBytes, wordCollectedBytes.Length, serverEndPoint);
             //byte[] responseBytes = udpClient.Receive(ref serverEndPoint);
             string response = Encoding.ASCII.GetString(udpClient.Receive(ref serverEndPoint));
             responseText.text = response;
-            Debug.Log(response);
+            //Debug.Log(response);
         }
         catch (Exception e)
         {
-            responseText.text = "Error: " + e.Message;
+            responseText.text = "Error!: " + e.Message;
         }
     }
 }
