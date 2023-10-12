@@ -49,6 +49,29 @@ Assignments
 - [4 - Open word Client](./assignments/part4-openwordclient.md)
 - [5 - Agar.io](./assignments/part5-agario.md)
 
+# Videos and screenshots
+Assignments 1-4:
+
+
+
+https://github.com/forsbergsskola-se/gp21-22-0427-agario-sara/assets/20385915/b1852026-0e36-477b-8e81-9d0baa537ca3
+
+
+
+https://github.com/forsbergsskola-se/gp21-22-0427-agario-sara/assets/20385915/45ed530e-e8b0-4142-923a-56ae256e1163
+
+
+
+
+![Screenshot 2023-10-11 200459](https://github.com/forsbergsskola-se/gp21-22-0427-agario-sara/assets/20385915/25142a26-4d95-42ab-8772-2311e27e72c3)
+![Screenshot 2023-10-12 034600](https://github.com/forsbergsskola-se/gp21-22-0427-agario-sara/assets/20385915/0b581858-5036-48f4-8d7d-42cb1a11017f)
+![Screenshot 2023-10-11 230703](https://github.com/forsbergsskola-se/gp21-22-0427-agario-sara/assets/20385915/80e79684-014e-4396-a7a9-64153f4cd575)
+![image](https://github.com/forsbergsskola-se/gp21-22-0427-agario-sara/assets/20385915/cd79b815-5158-4b9c-ac58-39c15ab7b275)
+![Screenshot 2023-10-12 035606](https://github.com/forsbergsskola-se/gp21-22-0427-agario-sara/assets/20385915/ba10cce6-3e12-40a4-b346-38319f8fa998)
+
+
+
+
 # Remarks
 - In the first four exercises, we are not using any advanced classes for working with `Streams`
   - it is slightly tedious, but it will teach you about how `byte[]` can be used as buffers
@@ -56,3 +79,5 @@ Assignments
 - Be wary of following Tutorials or downloading Sample Code. Chances are that it's extremely over-engineered and that I'll notice tha the code is not yours.
 - Especially exercises 1-4 do not require any complex code.
 - For Exercise 5, it's also best to start very small and slowly scale it up when required.
+
+
