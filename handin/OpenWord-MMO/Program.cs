@@ -30,7 +30,8 @@ class Program
             //Receive data from a client and get the remote endpoint
             var (receivedBytes, remoteEndPoint) = ReceiveData();
 
-            Console.WriteLine($"Number of characters of received message: {receivedBytes.Length} ...");
+            string receivedWordGeneral = Encoding.ASCII.GetString(receivedBytes);
+            Console.WriteLine($"Number of characters of received message: {receivedWordGeneral.Length} ...");
 
 
             if (ValidateReceivedMessage(receivedBytes))
@@ -38,7 +39,7 @@ class Program
                 Console.WriteLine("--||Accepted!");
 
                 string receivedWord = Encoding.ASCII.GetString(receivedBytes);
-                Console.WriteLine($"||Received word: {receivedWord} ...");
+                //Console.WriteLine($"||Received word: {receivedWord}...");
                 accumulatedText += " " + receivedWord;
            
                 Console.WriteLine("||Received message joined with existing messages");
